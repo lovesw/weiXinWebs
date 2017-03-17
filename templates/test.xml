@@ -1,0 +1,46 @@
+<xml>
+    <ToUserName><![CDATA[gh_b7927de951c3]]></ToUserName>
+    <Encrypt>
+        <![CDATA[v7Y7lO6qT9aZNbvmC8xbUx+UaZrjF8mVRVX/g1s+Tmx4PO72GWM3dfXiVHorPz0to7C+4mMcMdPNMW005sAbn03+42jm53ULzW7DoUzlh5q08bejRXDkaSp7Raze3pbyN0jTkSy+xbbYOtjZu9VxqvmHRhQ35+8qNSZQo+7ysNfQT5x4D1ZtmHkpSRoiXjC14eAVYpwsZZfGEhaVsZIUtMuLAOAQvpiJMxkp8w42/Ahm+MYSmZooJ8itP04gFI5Co0g/n96f1tpJueAaJ/du+LHnY3XD3Er/uhO2t+1oJmRHp7ZMmBPJYIWprxn12hQ0FqCfQDMfMQxbCnCLh+5qGgT4TDS4S3bebd8436lBG6ZVrOHmnapIFHMTvBvDRPFYhdAntBoe6NajJY0hpumJI2/L6RB70pr6m7niY9+8z2U=]]></Encrypt>
+</xml>
+<xml>
+<ToUserName><![CDATA[gh_b7927de951c3]]></ToUserName>
+<FromUserName><![CDATA[oFmbcwJj-0t7bMd2Ra9_LtylmHO0]]></FromUserName>
+<CreateTime>1489638224</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[hjjkl]]></Content>
+<MsgId>6397947455616724461</MsgId>
+</xml>
+
+<xml>
+<Encrypt>
+    <![CDATA[tKUvIhJU+z9BGRpf1clEwJRuytr6EL4WFnqR00P7ZBTDMoCejzmhG2S2+QVhzUQdB2bF0NZ7MI21QlWb1f2RrZ+f2zp36y4rdzjgWYww9UHkM1ZCv0sl6wr/aGfxvK2YwDDofd8kT546Ruuolwi0JLw1bJWgTY93cNb9g0KJCMUGQVhp3i3UpPyEwY1Ut04O47Kpevx28ff9qkWNAFJAXjiW74/Zr3aOOVwikp+CU7NjOiyFxqwzGh6z6LOB7kr2cKiZsSsDCJpfq39LFe4oFPi0cdGph7iVM1Q13YLd/MQmJpp0KY2JrHhX2+vpgylkAa4Hlvrb+fJWXgyWJyNkX5NckXQ5SpKwK32Jnyl2n1kReKyYdh9a++Yh9QdbBB+uliFN51snW8WBcyYeGStdMV6/dOURfhdC3Uzqd5bth03Uzz3TWmziQ01RFwfR7hfzUQhmDxPi1afSQSS7yPAsuLTmSCgdgqmOcT4hfe5+96mHL8RAoQBV8q8cuxVH5S2C5Krp14htGwlgwsD2JkKBpK82cELBEEgixUscLh7F3dIOfXVk1GqQBC8LlJuB99MWn9rfNdy1T16KLZVcldwNztGCWog1xVYUFSOPl1dIm0IG4lNVsKpXutc0RLBsxFgb]]></Encrypt>
+<MsgSignature><![CDATA[5e682600f559cc5caf7df4712659767ab85ffad3]]></MsgSignature>
+<TimeStamp>1489653879</TimeStamp>
+<Nonce><![CDATA[1320562132]]></Nonce>
+</xml>
+<xml>
+<ToUserName><![CDATA[oia2TjjewbmiOUlr6X-1crbLOvLw]]></ToUserName>
+<FromUserName><![CDATA[gh_7f083739789a]]></FromUserName>
+<CreateTime>1407743423</CreateTime>
+<MsgType>  <![CDATA[video]]></MsgType>
+<Video>
+    <MediaId><![CDATA[eYJ1MbwPRJtOvIEabaxHs7TX2D-HV71s79GUxqdUkjm6Gs2Ed1KF3ulAOA9H1xG0]]></MediaId>
+    <Title><![CDATA[testCallBackReplyVideo]]></Title>
+    <Descript ion><![CDATA[testCallBackReplyVideo]]></Description>
+</Video>
+</xml>
+
+
+ msg_signature = ''.join(request.GET.get('msg_signature'))
+        timestamp = ''.join(request.GET.get('timestamp'))
+        nonce = ''.join(request.GET.get('nonce'))
+        data = request.body.decode('utf-8')
+        wXBizMsgCrypt = weiUtil.WXBizMsgCrypt(Token, EncodingAESKey, AppId)
+        ret, xml_content = wXBizMsgCrypt.DecryptMsg(data, msg_signature, timestamp, nonce)
+        if ret == 0:
+            # 解码为utf-8
+            xml_content = xml_content.decode('utf-8')
+            # 解析xml 字符串
+            xml = ET.fromstring(xml_content)  # 进行XML解析
+            msgType = xml.find("MsgType").text
